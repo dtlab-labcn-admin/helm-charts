@@ -15,6 +15,6 @@ entries:
     sources:
     - http://www.github.com/PowerDNS/
     urls:
-    - https://idlab-org.github.io/helm-charts/powerdns-1.0.0.tgz
+    - https://idlab-org.github.io/helm-charts/powerdns/powerdns-1.0.0.tgz
     version: 1.0.0
 generated: "2021-04-30T12:01:51.514417643-04:00"
