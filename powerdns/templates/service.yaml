@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "powerdns.fullname" . }}-udp
+{{- if .Values.service.udp.annotations }}
+  annotations:
+{{ toYaml .Values.service.udp.annotations | indent 4 }}
+{{- end }}
+  labels:
+{{ include "powerdns.labels" . | indent 4 }}
+spec:
+  type: {{ .Values.service.udp.type }}
+{{ if .Values.service.udp.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.service.udp.loadBalancerIP }}
+{{ end }}
+{{- if .Values.service.udp.externalIPs }}
+  externalIPs:
+{{ toYaml .Values.service.udp.externalIPs | indent 4 }}
+{{- end }}
+{{- if (.Values.service.udp.externalTrafficPolicy) }}
+  externalTrafficPolicy: "{{ .Values.service.udp.externalTrafficPolicy }}"
+{{- end }}
+  ports:
+    - name: dns-udp
+      port: 53
+      protocol: UDP
+  selector:
+    app.kubernetes.io/name: {{ include "powerdns.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "powerdns.fullname" . }}-tcp
+{{- if .Values.service.tcp.annotations }}
+  annotations:
+{{ toYaml .Values.service.tcp.annotations | indent 4 }}
+{{- end }}
+  labels:
+{{ include "powerdns.labels" . | indent 4 }}
+spec:
+  type: {{ .Values.service.tcp.type }}
+{{ if .Values.service.tcp.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.service.tcp.loadBalancerIP }}
+{{ end }}
+{{- if .Values.service.tcp.externalIPs }}
+  externalIPs:
+{{ toYaml .Values.service.tcp.externalIPs | indent 4 }}
+{{- end }}
+{{- if (.Values.service.tcp.externalTrafficPolicy) }}
+  externalTrafficPolicy: "{{ .Values.service.tcp.externalTrafficPolicy }}"
+{{- end }}
+  ports:
+    - name: dns-tcp
+      port: 53
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: {{ include "powerdns.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "powerdns.fullname" . }}-webserver
+{{- if .Values.service.annotations }}
+  annotations:
+{{ toYaml .Values.service.annotations | indent 4 }}
+{{- end }}
+  labels:
+{{ include "powerdns.labels" . | indent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8081
+      targetPort: dns-webserver
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: {{ include "powerdns.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
