@@ -6,7 +6,7 @@ entries:
     created: "2021-04-30T12:01:51.519570502-04:00"
     description: PowerDNS is a DNS server, written in C++ and licensed under the GPL. It runs on most Unix derivatives. PowerDNS features a large number of different backends ranging from simple BIND style zonefiles to relational databases and load balancing/failover algorithms. A DNS recursor is provided as a separate program.
     digest: 7b9340914580b00ec272c3b0376727c4153464f1ee43308acf2d25740914cb30
-    home: https://github.com/idlab-org/charts/tree/master/helm-charts/powerdns
+    home: https://github.com/it-admin-idlab-org/helm-charts/
     icon: https://www.powerdns.com/img/pDNS_logo_positive_claim_down_screen_xsmall.png
     maintainers:
     - email: it-admin@idlab.org
@@ -15,6 +15,6 @@ entries:
     sources:
     - http://www.github.com/PowerDNS/
     urls:
-    - https://idlab-org.github.io/helm-charts/powerdns/powerdns-1.0.0.tgz
+    - https://it-admin-idlab-org.github.io/helm-charts/powerdns/powerdns-1.0.0.tgz
     version: 1.0.0
 generated: "2021-04-30T12:01:51.514417643-04:00"
